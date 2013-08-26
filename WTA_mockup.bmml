@@ -329,5 +329,10 @@
         <text/>
       </controlProperties>
     </control>
+    <control controlID="78" controlTypeID="com.balsamiq.mockups::TextInput" x="136" y="880" w="190" h="-1" measuredW="89" measuredH="27" zOrder="66" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Organization</text>
+      </controlProperties>
+    </control>
   </controls>
 </mockup>
