@@ -8,8 +8,8 @@ class User extends CI_Controller
   {
     parent:: __construct();
     $this->load->model('User_model');
-    $this->load->helper(array('form', 'url'));
     $this->load->library('form_validation');
+    $this->output->enable_profiler(TRUE);
   } 
   
   public function process_login()
@@ -60,11 +60,19 @@ class User extends CI_Controller
 
   public function process_registration()
   {
+    $this->load->library('form_validation');
     $this->form_validation->set_rules('first_name', "First Name", 'alpha|required');
     $this->form_validation->set_rules('last_name', "Last Name", 'alpha|required');
     $this->form_validation->set_rules('email', 'Email', 'valid_email|required');
-    $this->form_validation->set_rules('password2', 'Password', 'password2[password1]|required');
+    $this->form_validation->set_rules('phone', 'Phone', 'is_natural|required');
+    $this->form_validation->set_rules('org', 'Organization', 'required');
+    $this->form_validation->set_rules('street1', 'Street 1', 'required');
+    $this->form_validation->set_rules('street2', 'Street 2', 'required');
+    $this->form_validation->set_rules('city', 'City', 'required|alpha');
+    $this->form_validation->set_rules('state', 'State', 'required|alpha|less_than[2]');
+    $this->form_validation->set_rules('zip', 'Zip Code', 'required|numeric');
     $this->form_validation->set_rules('password1', 'Password', 'min_length[6]|required');
+    $this->form_validation->set_rules('password2', 'Password', 'matches[password1]|required');
 
     if ($this->form_validation->run() == FALSE) 
     {
@@ -87,35 +95,7 @@ class User extends CI_Controller
     }
   }
 
-  public function process_registration_admin()
-  {
-    $this->load->library('form_validation');
-    $this->form_validation->set_rules('first_name', "First Name", 'alpha|required');
-    $this->form_validation->set_rules('last_name', "Last Name", 'alpha|required');
-    $this->form_validation->set_rules('email', 'Email', 'valid_email|required');
-    $this->form_validation->set_rules('password2', 'Password', 'password2[password1]');
-    $this->form_validation->set_rules('password1', 'Password', 'min_length[6]|required');
-
-    if ($this->form_validation->run() == FALSE) 
-    {
-      $errors = "<div class='alert-box alert' id='error-box'>" . validation_errors() . "</div>";
-      echo json_encode($errors);
-    }
-    else
-    {
-      $this->load->library('encrypt');
-      $encrypted_password = $this->encrypt->encode($this->input->post('password1'));
-      $data = array(
-        'first_name' => $this->input->post('first_name'),
-        'last_name' => $this->input->post('last_name'),
-        'email' => $this->input->post('email'),
-        'password' => $encrypted_password
-        );
-      $user = $this->User_model->register_user($data);
-      $success = "<div class='alert-box success' id='success-box'><p>This user is now added to the database.</p></div>";
-        echo json_encode($success);
-    }
-  }
+  
 
   public function logout()
   {
@@ -140,8 +120,15 @@ class User extends CI_Controller
     $this->form_validation->set_rules('first_name', "First Name", 'alpha|required');
     $this->form_validation->set_rules('last_name', "Last Name", 'alpha|required');
     $this->form_validation->set_rules('email', 'Email', 'valid_email|required');
-    $this->form_validation->set_rules('password2', 'Password', 'password2[password1]');
+    $this->form_validation->set_rules('phone', 'Phone', 'is_natural|required');
+    $this->form_validation->set_rules('org', 'Organization', 'required');
+    $this->form_validation->set_rules('street1', 'Street 1', 'required');
+    $this->form_validation->set_rules('street2', 'Street 2', 'required');
+    $this->form_validation->set_rules('city', 'City', 'required|alpha');
+    $this->form_validation->set_rules('state', 'State', 'required|alpha|less_than[2]');
+    $this->form_validation->set_rules('zip', 'Zip Code', 'required|numeric');
     $this->form_validation->set_rules('password1', 'Password', 'min_length[6]|required');
+    $this->form_validation->set_rules('password2', 'Password', 'matches[password1]|required');
 
     if ($this->form_validation->run() == FALSE) 
     {
