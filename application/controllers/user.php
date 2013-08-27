@@ -68,7 +68,7 @@ class User extends CI_Controller
     $this->form_validation->set_rules('phone', 'Phone', 'is_natural|required');
     $this->form_validation->set_rules('street1', 'Street 1', 'required');
     $this->form_validation->set_rules('street2', 'Street 2', '');
-    $this->form_validation->set_rules('city', 'City', 'required|alpha');
+    $this->form_validation->set_rules('city', 'City', 'required');
     $this->form_validation->set_rules('state', 'State', 'required|alpha|max_length[3]');
     $this->form_validation->set_rules('zip', 'Zip Code', 'required|numeric');
     $this->form_validation->set_rules('password1', 'Password', 'min_length[6]|required');
@@ -94,7 +94,7 @@ class User extends CI_Controller
         'state' => $this->input->post('state'),
         'zip' => $this->input->post('zip'),
         'password' => $encrypted_password,
-        'organizations_id' => $this->input->post('org_select')
+        'useranizations_id' => $this->input->post('user_select')
         );
 
       $user = $this->User_model->register_user($data);
@@ -102,6 +102,139 @@ class User extends CI_Controller
         echo json_encode($success);
     }
   }
+
+  public function display_user_edit()
+  {
+    $data = array(
+      'first_name' => $this->input->post('user_Fname_search'),
+      'last_name' => $this->input->post('user_Lname_search'),
+      'email' => $this->input->post('user_email_search'),
+      'state' => $this->input->post('user_state_search'),
+      );
+
+    $user = $this->User_model->get_user_search($data);
+
+    // Pagination code below... Beware all ye who enter here
+
+    // the number of pagination tabs
+    $page_num = 0;
+    
+    // $page_num_array will be used to index pagination links to correspond and connect them with indexes in pagination_array
+    $page_num_array = array ();
+
+    // $data array will contain the results to be displayed
+    $data_array = array ();
+
+    // $pagination_array will be the combined output of page_num_array and data_array
+    $pagination_array = array ();
+
+
+    // iterates through $user's data
+    for ($i=0; $i < count($user) ; $i++) 
+    { 
+      // adds each return to the data_array up to 10
+      $data_array[] = $user[$i];
+      // executed if the remaining elements are less than 10
+      if ($i == (count($user) - 1)) 
+      {
+        $j = $i;
+        while ( $j % 4 == 0) 
+        {
+          $j++;
+        }
+        $page_num ++;
+        $page_num_array[] = $page_num;
+        $pagination_array[$page_num] = $data_array;
+        $data_array = array ();
+      }
+
+      if ($i != 0 AND ($i + 1) % 4 == 0) 
+      {
+        $page_num ++;
+        $page_num_array[] = $page_num;
+        $pagination_array[$page_num] = $data_array;
+        $data_array = array ();
+      }
+    }
+    $html = NULL;
+    // creates the pagination display
+    $html = $this->display_pagination($page_num_array);
+    // adds the data tables to the display
+    $html .= $this->data_output_edit($pagination_array);
+
+    echo json_encode($html);
+  }
+
+  public function display_pagination($array)
+  {
+    $html ="<div class='pagination-centered'>
+        <ul class='pagination'>";
+    foreach ($array as $key) 
+    {
+      // each pagination link's id corresponds to the key number. this will correspond to the index number of the different tables
+      $html .="
+        <li><a href='#' id='{$key}'>{$key}</a></li>";
+    }
+    $html .= "
+          </ul>
+        </div>";
+    return $html;
+  }
+
+  public function data_output_edit($array)  // outputted table code
+  {    
+    $html = '';
+    foreach ($array as $index => $key)
+    {
+      
+      // each table has a different page index. This matches the index of the pagination links
+    
+      $html .= "
+        <table class=
+        'table' id='page{$index}'>
+          <thead>
+            <tr>
+              <th width='175'>First Name:</th>
+              <th width='175'>Last Name:</th>
+              <th width='175'>Phone Number:</th>
+              <th width='175'>Email Address:</th>
+              <th width='175'>Address:</th>
+              <th width='125'>Organization</th>
+            </tr>
+          </thead>
+          <tbody>
+      ";
+      foreach ($key as $key2) 
+      {
+      $html .= "
+        <tr>
+          <td>{$key2->first_name}</td>
+          <td>{$key2->last_name}</td>
+          <td>{$key2->phone}</td>
+          <td>{$key2->email}</td>
+          <td>
+            {$key2->street1}
+            <br>
+            {$key2->street2}
+            <br>
+            {$key2->city}  {$key2->state}
+            <br>
+            {$key2->zip}
+          </td>
+          <td>
+            <button value='{$key2->organizations_id}' class='button small' class='viewOrg'>View Organization</button>
+          </td>
+        </tr>
+      ";
+      }
+    $html .= "
+        </tbody>
+      </table>
+    ";
+    }
+    return $html;
+  }
+
 
   public function logout()
   {
@@ -127,7 +260,7 @@ class User extends CI_Controller
     $this->form_validation->set_rules('last_name', "Last Name", 'alpha|required');
     $this->form_validation->set_rules('email', 'Email', 'valid_email|required');
     $this->form_validation->set_rules('phone', 'Phone', 'is_natural|required');
-    $this->form_validation->set_rules('org', 'Organization', 'required');
+    $this->form_validation->set_rules('user', 'useranization', 'required');
     $this->form_validation->set_rules('street1', 'Street 1', 'required');
     $this->form_validation->set_rules('street2', 'Street 2', 'required');
     $this->form_validation->set_rules('city', 'City', 'required|alpha');

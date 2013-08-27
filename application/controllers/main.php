@@ -26,6 +26,7 @@ class Main extends CI_Controller
 
     $this->load->view('head', $data);
     $this->load->view('index', $data);
+    $this->load->view('loginRegisterModals');
     $this->load->view('bottom', $data);
   }
 

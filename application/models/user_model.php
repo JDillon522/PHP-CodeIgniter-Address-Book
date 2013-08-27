@@ -18,6 +18,29 @@ class User_model extends CI_Model
     return $this->db->insert("users", $user);
   }
 
+  public function get_user_search($data)
+  {
+    $result_arr = null;
+    $this->db->like('first_name', $data['first_name'], 'after');
+    $this->db->like('last_name', $data['last_name'], 'after');
+    $this->db->like('email', $data['email'], 'after');
+    $this->db->like('state', $data['state'], 'after');
+    
+    $query = $this->db->get('users');
+
+    if ($query == NULL) 
+    {
+      return NULL;
+    }
+    else
+    {
+      foreach ($query->result() as $row) 
+      {
+        $result_arr[] = $row;
+      }
+      return $result_arr;  
+    }
+  }
 
 
   public function delete_user($input)

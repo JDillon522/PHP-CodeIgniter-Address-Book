@@ -7,7 +7,6 @@ class Dashboard extends CI_Controller
     parent:: __construct();
     $this->load->model('User_model');
     $this->check_session();
-    // $this->user_data = $this->User_model->display_users();
     // $this->output->enable_profiler(TRUE);
 
   }
@@ -31,6 +30,8 @@ class Dashboard extends CI_Controller
     $this->load->view('head', $data);
     $this->load->view('navbar');
     $this->load->view('dashboard', $data);
+    $this->load->view('loginRegisterModals');
+    $this->load->view('addEditModals');
     $this->load->view('bottom', $data);
 
   }

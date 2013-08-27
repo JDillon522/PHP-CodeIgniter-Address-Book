@@ -1,4 +1,3 @@
-<!-- Scripts loaded at the bottom to help the page load faster -->
 <script>
 document.write('<script src=' +
 ('__proto__' in {} ? '../../assets/js/vendor/zepto' : '../../assets/js/vendor/jquery') +
