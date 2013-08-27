@@ -12,6 +12,7 @@ $(document).ready(function(){
     );
     return false;
   });
+
   $('#login_form').submit(function(){
     $.post
     (

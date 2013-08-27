@@ -15,7 +15,7 @@
         <li class="divider"></li>
         <li><a href="#" data-reveal-id="login-modal">Login</a></li>
         <li class="divider"></li>
-        <li><a href="#" data-reveal-id="register-modal">Register</a></li>
+        <li><a href="#" data-reveal-id="register_modal">Register</a></li>
         <li class="divider"></li>          
       </ul>
   </nav>
@@ -39,7 +39,7 @@
 </div>
 
 <!-- Register Form -->
-<div class="reveal-modal medium" id="register-modal">  
+<div class="reveal-modal medium" id="register_modal">  
   <h3>Register A User:</h3>
   <div class="row">
     <form method="post" action="../user/process_registration" id="register_form">
@@ -56,8 +56,8 @@
         </div>
         <div class="row">
           <div class="large-4 columns">
-            <label>Organization:</label>
-            <input type="text" id="org" name="org" placeholder="Organization" />
+            <!-- <label>Organization:</label>
+            <input type="text" id="org" name="org" placeholder="Organization" /> -->
           </div>
           <div class="large-4 columns">
             <label>Email Address:</label>

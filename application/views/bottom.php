@@ -5,7 +5,7 @@ document.write('<script src=' +
 '.js><\/script>')
 </script>
 <script src="../../assets/js/foundation.min.js"></script>
-
+<script type="text/javascript" src="../../assets/js/loginRegister.js"></script>
 
 <script>
   $(document).foundation();

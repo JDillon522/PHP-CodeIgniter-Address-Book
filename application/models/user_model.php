@@ -13,6 +13,8 @@ class User_model extends CI_Model
 
   public function register_user($user)
   {
+    $this->db->set('created_at', 'NOW()', FALSE);
+    $this->db->set('updated_at', 'NOW()', FALSE);
     return $this->db->insert("users", $user);
   }
 

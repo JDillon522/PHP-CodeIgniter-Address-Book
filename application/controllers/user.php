@@ -9,7 +9,7 @@ class User extends CI_Controller
     parent:: __construct();
     $this->load->model('User_model');
     $this->load->library('form_validation');
-    $this->output->enable_profiler(TRUE);
+    // $this->output->enable_profiler(TRUE);
   } 
   
   public function process_login()
@@ -65,11 +65,11 @@ class User extends CI_Controller
     $this->form_validation->set_rules('last_name', "Last Name", 'alpha|required');
     $this->form_validation->set_rules('email', 'Email', 'valid_email|required');
     $this->form_validation->set_rules('phone', 'Phone', 'is_natural|required');
-    $this->form_validation->set_rules('org', 'Organization', 'required');
+    // $this->form_validation->set_rules('org', 'Organization', 'required');
     $this->form_validation->set_rules('street1', 'Street 1', 'required');
-    $this->form_validation->set_rules('street2', 'Street 2', 'required');
+    $this->form_validation->set_rules('street2', 'Street 2', '');
     $this->form_validation->set_rules('city', 'City', 'required|alpha');
-    $this->form_validation->set_rules('state', 'State', 'required|alpha|less_than[2]');
+    $this->form_validation->set_rules('state', 'State', 'required|alpha|max_length[3]');
     $this->form_validation->set_rules('zip', 'Zip Code', 'required|numeric');
     $this->form_validation->set_rules('password1', 'Password', 'min_length[6]|required');
     $this->form_validation->set_rules('password2', 'Password', 'matches[password1]|required');
@@ -87,8 +87,15 @@ class User extends CI_Controller
         'first_name' => $this->input->post('first_name'),
         'last_name' => $this->input->post('last_name'),
         'email' => $this->input->post('email'),
+        'phone' => $this->input->post('phone'),
+        'street1' => $this->input->post('street1'),
+        'street2' => $this->input->post('street2'),
+        'city' => $this->input->post('city'),
+        'state' => $this->input->post('state'),
+        'zip' => $this->input->post('zip'),
         'password' => $encrypted_password
         );
+
       $user = $this->User_model->register_user($data);
       $success = "<div class='alert-box success' id='success-box'><p>Thank you for submitting your data. You may now log in.</p></div>";
         echo json_encode($success);
