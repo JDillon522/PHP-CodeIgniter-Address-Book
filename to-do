@@ -1,3 +1,6 @@
 - redo the register modal. Its too busy and it doesnt have a good layout
 - get the register modal's values to clear upon submission 
 - potentially rework the DB to have User's address' separate 
+- look into Oauth,TankAuth,IonAuth for third party login and registration 
+- add end of file info to all docs
+- Fix the Org registeration Ajax so that the list in register users is updated with the new Org.

@@ -1,5 +1,24 @@
 $(document).ready(function(){
-  $('#register_form').submit(function(){
+  $('#login_form').submit(function(){
+    $.post
+    (
+      $(this).attr('action'),
+      $(this).serialize(),
+      function(data){
+        if (data == "success") {
+          window.location.href = "/dashboard/index";
+        }
+        else{
+          console.log(data);
+          $('#alert_box1').html(data);
+        };
+      },
+      "json"
+    );
+    return false;
+  });
+
+  $('#register_user_form').submit(function(){
     $.post
     (
       $(this).attr('action'),
@@ -13,20 +32,14 @@ $(document).ready(function(){
     return false;
   });
 
-  $('#login_form').submit(function(){
+  $('#register_org_form').submit(function(){
     $.post
     (
       $(this).attr('action'),
       $(this).serialize(),
       function(data){
-        if (data == "success") {
-          window.location.href = "/dashboard/index";
-
-        }
-        else{
-          console.log(data);
-          $('#alert_box').html(data);
-        };
+        console.log(data);
+        $('#alert_box3').html(data);
       },
       "json"
     );

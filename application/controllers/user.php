@@ -1,8 +1,7 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class User extends CI_Controller
 {
-
   //initalization
   public function __construct()
   {
@@ -14,7 +13,6 @@ class User extends CI_Controller
   
   public function process_login()
   {
-    $this->load->library('form_validation');
     $this->form_validation->set_rules('email', 'Email', 'valid_email|required');
     $this->form_validation->set_rules('password0', 'Password', 'min_length[6]|required');
     if ($this->form_validation->run() == FALSE) 
@@ -29,6 +27,12 @@ class User extends CI_Controller
       
       $data = array();
       $data['email'] = $this->input->post('email');
+      // $encrypted_password = $this->encrypt->encode($this->input->post('password0'));
+      // $user = $this->User_model->get_user($data);
+     
+      // if (count($user) > 0) 
+      // {
+      //   if ($encrypted_password == $user->password) 
 
       $user = $this->User_model->get_user($data);
 
@@ -51,21 +55,17 @@ class User extends CI_Controller
       {
         $errors = "<div class='alert-box alert' id='error-box'><p>Your login information did not match our reccords. Try again</p></div>";
         echo json_encode($errors);
-      }
-      
-
-          
+      }          
     }
   }
 
-  public function process_registration()
+  public function process_user_registration()
   {
     $this->load->library('form_validation');
     $this->form_validation->set_rules('first_name', "First Name", 'alpha|required');
     $this->form_validation->set_rules('last_name', "Last Name", 'alpha|required');
     $this->form_validation->set_rules('email', 'Email', 'valid_email|required');
     $this->form_validation->set_rules('phone', 'Phone', 'is_natural|required');
-    // $this->form_validation->set_rules('org', 'Organization', 'required');
     $this->form_validation->set_rules('street1', 'Street 1', 'required');
     $this->form_validation->set_rules('street2', 'Street 2', '');
     $this->form_validation->set_rules('city', 'City', 'required|alpha');
@@ -93,7 +93,8 @@ class User extends CI_Controller
         'city' => $this->input->post('city'),
         'state' => $this->input->post('state'),
         'zip' => $this->input->post('zip'),
-        'password' => $encrypted_password
+        'password' => $encrypted_password,
+        'organizations_id' => $this->input->post('org_select')
         );
 
       $user = $this->User_model->register_user($data);
@@ -101,8 +102,6 @@ class User extends CI_Controller
         echo json_encode($success);
     }
   }
-
-  
 
   public function logout()
   {
@@ -157,6 +156,5 @@ class User extends CI_Controller
       $success = "<div class='alert-box success' id='success-box'><p>The account info has been updated.</p></div>";
       echo json_encode($success);
     }
-
   }
 }
