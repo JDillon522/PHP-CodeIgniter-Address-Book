@@ -12,15 +12,13 @@ class Dashboard extends CI_Controller
     // $this->output->enable_profiler(TRUE);
     $this->load->model('Org_model');
     $this->orgOptions = $this->orgDisplay();
-
-
   }
 
   private function check_session()
   {
     if ($this->session->userdata('user_session') == '') 
     {
-      header('location: /welcome/index');
+      header('location: /main/index');
     }
   }
 
@@ -40,7 +38,6 @@ class Dashboard extends CI_Controller
     $this->load->view('loginRegisterModals', $data);
     $this->load->view('addEditModals');
     $this->load->view('bottom', $data);
-
   }
 
   public function orgDisplay()

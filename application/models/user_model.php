@@ -88,8 +88,9 @@ class User_model extends CI_Model
 
   public function edit_user($data, $users_id)
   {
-    return $this->db->where('id', $users_id)
-            ->update('users', $data);
+    $this->db->set('updated_at', 'NOW()', FALSE);
+    return $this->db
+                ->update('users', $data, array('id' => $users_id));
   }
 
 }

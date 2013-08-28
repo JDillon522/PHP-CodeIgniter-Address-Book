@@ -51,6 +51,60 @@ class Org extends CI_Controller
     }
   }
 
+  public function process_org_edit()
+  {
+    $this->load->library('form_validation');
+    $this->form_validation->set_rules('org_name', "Organization Name", 'required');
+    $this->form_validation->set_rules('email', 'Email', 'valid_email|required');
+    $this->form_validation->set_rules('phone', 'Phone', 'is_natural|required');
+    $this->form_validation->set_rules('street1', 'Street 1', 'required');
+    $this->form_validation->set_rules('street2', 'Street 2', '');
+    $this->form_validation->set_rules('city', 'City', 'required');
+    $this->form_validation->set_rules('state', 'State', 'required|alpha|max_length[3]');
+    $this->form_validation->set_rules('zip', 'Zip Code', 'required|numeric');
+
+    if ($this->form_validation->run() == FALSE) 
+    {
+      $errors = "<div class='alert-box alert' id='error-box'>" . validation_errors() . "</div>";
+      echo json_encode($errors);
+    }
+    else
+    {
+      $org_id = $this->input->post('edit_org_id');
+
+      $data = array(
+        'org_name' => $this->input->post('org_name'),
+        'org_email' => $this->input->post('email'),
+        'org_phone' => $this->input->post('phone'),
+        'street1' => $this->input->post('street1'),
+        'street2' => $this->input->post('street2'),
+        'city' => $this->input->post('city'),
+        'state' => $this->input->post('state'),
+        'zip' => $this->input->post('zip'),
+        );
+
+      $org = $this->Org_model->edit_org($data, $org_id);
+      $success = "<div class='alert-box success' id='success-box'><p>Thank you for submitting your data.</p></div>";
+
+      echo json_encode($success);
+    }
+  }
+
+  public function edit_org()
+  {
+    header('Content-type: application/json');
+    $data = array(
+    'id' => $this->input->post('org_id'),
+    );
+        
+    $org = $this->Org_model->get_org_edit($data);
+    $orgData = array();
+    foreach ($org[0] as $key => $value) {
+      $orgData[$key] = $value;
+    }
+    echo json_encode($orgData);
+  }
+
 // ***** Display the organization data *****
   // calls
   public function display_org()
@@ -82,11 +136,11 @@ class Org extends CI_Controller
     $data = array(
       'id' => $this->input->post('orgId'),
       );
-        
 
     $org = $this->Org_model->get_org_select($data);
     $this->format_data($org, 'edit');
   }
+  
   // **********
   // Formatting paths
   public function display_pagination($array)
@@ -176,7 +230,7 @@ class Org extends CI_Controller
     
       $html .= "
         <table class=
-        'table' id='page{$index}'>
+        'table orgTable' id='orgPage{$index}'>
           <thead>
             <tr>
               <th width='300'>Organization Name:</th>
@@ -263,7 +317,11 @@ class Org extends CI_Controller
           <td>";
 
         if ($this->userID->organizations_id == $key2->id) {
-        $html .= "<button class='button success small'>Edit</button>";
+        $html .= "
+          <form class='edit_org' method='post' action='../org/edit_org'>
+            <input type='hidden' value='{$key2->id}' name='org_id'>  
+            <input type='submit' class='button success small' value='Edit'>
+          </form>";
         }
         else
         {

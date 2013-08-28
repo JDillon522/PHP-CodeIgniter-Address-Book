@@ -78,4 +78,5 @@
 </div>
 
 <script type="text/javascript" src="../../assets/js/searchDisplay.js"></script>
+<script type="text/javascript" src="../../assets/js/edit.js"></script>
 

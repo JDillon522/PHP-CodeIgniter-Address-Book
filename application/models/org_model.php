@@ -22,6 +22,28 @@ class Org_model extends CI_Model
     }
   }
 
+  public function get_org_edit($data)
+  {
+    $result_arr = null;
+    
+    $query = $this->db
+                  ->where('id', $data['id'])
+                  ->get('organizations');                  
+
+    if ($query == NULL) 
+    {
+      return NULL;
+    }
+    else
+    {
+      foreach ($query->result() as $row) 
+      {
+        $result_arr[] = $row;
+      }
+    return $result_arr;  
+    }
+  }
+
   public function get_org_search($data)
   {
     $result_arr = null;
@@ -74,5 +96,12 @@ class Org_model extends CI_Model
     $this->db->set('created_at', 'NOW()', FALSE);
     $this->db->set('updated_at', 'NOW()', FALSE);
     return $this->db->insert("organizations", $org);
+  }
+
+  public function edit_org($data, $org_id)
+  {
+    $this->db->set('updated_at', 'NOW()', FALSE);
+    return $this->db->where('id', $org_id)
+            ->update('organizations', $data);
   }
 } 

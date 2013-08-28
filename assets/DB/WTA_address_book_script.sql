@@ -1,0 +1,1 @@
+SELECT * FROM WTA_address_book.organizations;

@@ -17,11 +17,10 @@
         <li class="divider"></li> 
         <li><a href="#" id="searchOrgs">Search Organizations</a></li>
         <li class="divider"></li> 
-        <li class="has-dropdown"><a>Add / Edit</a>
+        <li class="has-dropdown"><a>Add</a>
           <ul class="dropdown">
             <li><a href="#" data-reveal-id="register_user_modal">Add User</a></li>
             <li><a href="#" data-reveal-id="register_org_modal">Add Organization</a></li>
-            <li><a href="#" data-reveal-id="register_org_modal">Edit My Data</a></li>
           </ul>
         </li>
         <li class="divider"></li>         

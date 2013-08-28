@@ -114,33 +114,5 @@ $(document).ready(function(){
     $('#usersPage'+$(this).attr('id')).show();
   return false;
   });
-
-// Edit User 
-  $(document).on('submit', '.edit_user', function(){
-    console.log('submit');
-    $.post
-    (
-      $(this).attr('action'),
-      $(this).serialize(),
-      function(data){
-        console.log("data");
-        console.log(data);
-        $('#edit_user').foundation('reveal', 'open');
-        $('#edit_first_name').val(data['first_name']);
-        $('#edit_last_name').val(data['last_name']);
-        $('#edit_email').val(data['email']);
-        $('#edit_phone').val(data['phone']);
-        $('#edit_street1').val(data['street1']);
-        $('#edit_street2').val(data['street2']);
-        $('#edit_city').val(data['city']);
-        $('#edit_state').val(data['state']);
-        $('#edit_zip').val(data['zip']);
-      },
-      "json"
-    );
-    console.log("return");
-    return false;
-  });
-
 });
 
