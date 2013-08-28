@@ -214,7 +214,7 @@ class User extends CI_Controller
     {
       // each pagination link's id corresponds to the key number. this will correspond to the index number of the different tables
       $html .="
-        <li><a href='#' id='{$key}'>{$key}</a></li>";
+        <li><a href='#' id='{$key}' class='pageAnchor'>{$key}</a></li>";
     }
     $html .= "
           </ul>
@@ -268,7 +268,7 @@ class User extends CI_Controller
               <form id='viewOrgs' method='post' action='../org/showOrg'>
                 <input type='hidden' value='{$key2->organizations_id}' name='orgId'>
                 <input type='hidden' value='{$key2->id}' name='user_id'>
-                <input type='submit' class='button small viewButton' class='viewOrg' value='View'>
+                <input type='submit' class='button small' class='viewOrg' value='View'>
               </form>
             </td>
             <td>";

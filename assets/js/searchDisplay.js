@@ -42,7 +42,7 @@ $(document).ready(function(){
     return false;
   }); 
   $("#org_search").submit();
-  $(document).on('click', 'a', function(e){
+  $(document).on('click', '.pageAnchor', function(e){
     $('.orgTable').hide();
     $('#orgPage'+$(this).attr('id')).show();
   return false;
@@ -109,7 +109,7 @@ $(document).ready(function(){
     );
     return false;
   }); 
-  $(document).on('click', 'a', function(e){
+  $(document).on('click', '.pageAnchor', function(e){
     $('.usersTable').hide();
     $('#usersPage'+$(this).attr('id')).show();
   return false;

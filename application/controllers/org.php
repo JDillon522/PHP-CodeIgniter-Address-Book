@@ -151,7 +151,7 @@ class Org extends CI_Controller
     {
       // each pagination link's id corresponds to the key number. this will correspond to the index number of the different tables
       $html .="
-        <li><a href='#' id='{$key}'>{$key}</a></li>";
+        <li><a href='#' id='{$key}' class='pageAnchor'>{$key}</a></li>";
     }
     $html .= "
           </ul>
