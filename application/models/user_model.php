@@ -82,7 +82,6 @@ class User_model extends CI_Model
       {
         $result_arr[] = $row;
       }
-      var_dump($result_arr);
     return $result_arr;  
     }
   }

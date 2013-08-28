@@ -48,13 +48,13 @@
           </div>
           <div class="large-6 columns">
             <label>Last Name:</label>
-            <input type="text" id="last_name" name="last_name" placeholder="Last Name" />
+            <input type="text" id="edit_last_name" name="last_name" placeholder="Last Name" />
           </div>
         </div>
         <div class="row">
           <div class="large-6 columns">
             <label>Email Address:</label>
-            <input type="text" id="email" name="email" placeholder="Email" /> 
+            <input type="text" id="edit_email" name="email" placeholder="Email" /> 
           </div>
           <div class="large-6 columns">
             <label>Organization:</label>
@@ -66,7 +66,7 @@
         <div class="row">
           <div class="large-6 columns">
             <label>Phone Number:</label>
-            <input type="text" id="phone" name="phone" placeholder="Format: 1234567890" />
+            <input type="text" id="edit_phone" name="phone" placeholder="Format: 1234567890" />
             <label>Password:</label>
             <input type="password" id="password1" name="password1" placeholder="Password" />
             <label>Confirm Your Password:</label>
@@ -74,16 +74,16 @@
           </div>
           <div class="large-6 columns">  
             <label>Address:</label>
-            <input type="text" id="street1" name="street1" placeholder="Street 1" />
-            <input type="text" id="street2" name="street2" placeholder="Street 2" />
+            <input type="text" id="edit_street1" name="street1" placeholder="Street 1" />
+            <input type="text" id="edit_street2" name="street2" placeholder="Street 2" />
             <label>City / State / Zip Code</label>
-            <input type="text" id="city" name="city" placeholder="City"  />
+            <input type="text" id="edit_city" name="city" placeholder="City"  />
             <div class="row">
               <div class="large-9 columns">
-                <input type="text" id="state" name="state" placeholder="State" />
+                <input type="text" id="edit_state" name="state" placeholder="State" />
               </div>
               <div class="large-3 columns">
-                <input type="text" id="zip" name="zip" placeholder="Zip" />
+                <input type="text" id="edit_zip" name="zip" placeholder="Zip" />
               </div>  
             </div>
           </div>

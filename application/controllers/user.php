@@ -137,21 +137,17 @@ class User extends CI_Controller
 
   public function edit_user()
   {
+    header('Content-type: application/json');
     $data = array(
     'id' => $this->input->post('user_id'),
     );
         
     $user = $this->User_model->get_user_edit($data);
-    echo "<pre>";
-    var_dump($user[0]);
-    echo "</pre>";
     $userData = array();
     foreach ($user[0] as $key => $value) {
       $userData[$key] = $value;
     }
-    echo "<pre>";
-    var_dump($userData);
-    echo "</pre>";
+    echo json_encode($userData);
   }
 
   // formatting functions 
@@ -309,17 +305,6 @@ class User extends CI_Controller
   {
     $this->session->sess_destroy();
     header('location:/main/index');
-  }
-
-  public function delete_user()
-  {
-    $input = $this->input->post('user_id');
-    $delete_comment = $this->User_model->delete_user_comment($input);
-    $delete_post = $this->User_model->delete_user_post($input);
-    $delete_user = $this->User_model->delete_user($input);
-
-    $deleted = "<div class='alert-box success' id='success-box'><p>User deleted.</p></div>";
-    echo json_encode($deleted); 
   }
 
   public function edit_user_validate()
