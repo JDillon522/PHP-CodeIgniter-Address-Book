@@ -47,6 +47,28 @@ class Org_model extends CI_Model
     }
   }
 
+  public function get_org_select($data)
+  {
+    $result_arr = null;
+    
+    $query = $this->db
+                  ->where('id', $data['id'])
+                  ->get('organizations');                  
+
+    if ($query == NULL) 
+    {
+      return NULL;
+    }
+    else
+    {
+      foreach ($query->result() as $row) 
+      {
+        $result_arr[] = $row;
+      }
+      return $result_arr;  
+    }
+  }
+
   public function register_org($org)
   {
     $this->db->set('created_at', 'NOW()', FALSE);

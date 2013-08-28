@@ -3,4 +3,6 @@
 - add end of file info to all docs
 - Fix the Org registeration Ajax so that the list in register users is updated with the new Org.
 - figure out glitch on main page where modal hides search pages
-- refactor search / pagination code so that I'm not repeating myself as much
+- make it so "none" is displayed when no data is present
+- Logout broke : WTF!
+- change display on phone numbers to ###-###-####

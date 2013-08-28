@@ -6,7 +6,7 @@ class User_model extends CI_Model
   {
     return $this->db
           ->where('email', $data['email'])
-          ->select('first_name, last_name, email, password, id')
+          ->select('first_name, last_name, email, password, id, organizations_id')
           ->get('users')
           ->row();
   }
@@ -42,34 +42,51 @@ class User_model extends CI_Model
     }
   }
 
-
-  public function delete_user($input)
+  public function get_user_select($data)
   {
-    return $this->db->delete('users', array('id' => $input));     
-  }
+    $result_arr = null;
+    
+    $query = $this->db
+                  ->where('organizations_id', $data['organization_id'])
+                  ->get('users');                  
 
-  public function delete_user_post($input)
-  {
-    return $this->db->delete('posts', array('posts.users_id' => $input));   
-  }
-
-  public function delete_user_comment($input)
-  {
-    return $this->db->delete('comments', array('comments.users_id' => $input));
-  }
-
-  public function display_users()
-  {
-    $result = $this->db->get('users');
-    return $result->result_array();
-  }
-
-  public function wall_user_info($uri)
-  {
-    $result = $this->db->get_where('users', array('id' => $uri));
-    return $result->result_array();
+    if ($query == NULL) 
+    {
+      return NULL;
+    }
+    else
+    {
+      foreach ($query->result() as $row) 
+      {
+        $result_arr[] = $row;
+      }
+    return $result_arr;  
+    }
   }
   
+  public function get_user_edit($data)
+  {
+    $result_arr = null;
+    
+    $query = $this->db
+                  ->where('id', $data['id'])
+                  ->get('users');                  
+
+    if ($query == NULL) 
+    {
+      return NULL;
+    }
+    else
+    {
+      foreach ($query->result() as $row) 
+      {
+        $result_arr[] = $row;
+      }
+      var_dump($result_arr);
+    return $result_arr;  
+    }
+  }
+
   public function edit_user($data, $users_id)
   {
     return $this->db->where('id', $users_id)

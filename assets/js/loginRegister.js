@@ -29,6 +29,7 @@ $(document).ready(function(){
       },
       "json"
     );
+    this.reset();
     return false;
   });
 

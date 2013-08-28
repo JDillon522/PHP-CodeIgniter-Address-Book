@@ -2,13 +2,15 @@
 
 class User extends CI_Controller
 {
+  var $userID;
+
   //initalization
   public function __construct()
   {
     parent:: __construct();
     $this->load->model('User_model');
     $this->load->library('form_validation');
-    // $this->output->enable_profiler(TRUE);
+    $this->userID =  $this->session->userdata("user_session");
   } 
   
   public function process_login()
@@ -27,13 +29,6 @@ class User extends CI_Controller
       
       $data = array();
       $data['email'] = $this->input->post('email');
-      // $encrypted_password = $this->encrypt->encode($this->input->post('password0'));
-      // $user = $this->User_model->get_user($data);
-     
-      // if (count($user) > 0) 
-      // {
-      //   if ($encrypted_password == $user->password) 
-
       $user = $this->User_model->get_user($data);
 
       if (count($user) > 0) 
@@ -94,15 +89,16 @@ class User extends CI_Controller
         'state' => $this->input->post('state'),
         'zip' => $this->input->post('zip'),
         'password' => $encrypted_password,
-        'useranizations_id' => $this->input->post('user_select')
+        'organizations_id' => $this->input->post('org_select')
         );
-
+      
       $user = $this->User_model->register_user($data);
       $success = "<div class='alert-box success' id='success-box'><p>Thank you for submitting your data. You may now log in.</p></div>";
         echo json_encode($success);
     }
   }
 
+  // ****** Display Users On Dashboard ********
   public function display_user_edit()
   {
     $data = array(
@@ -113,7 +109,54 @@ class User extends CI_Controller
       );
 
     $user = $this->User_model->get_user_search($data);
+    $this->format_data($user, 'edit');
+  }
 
+  public function showUsers()
+  {
+    $data = array(
+      'organization_id' => $this->input->post('usersId'),
+      );
+        
+    $user = $this->User_model->get_user_select($data);
+    $this->format_data($user, 'edit');
+  }
+
+  public function selectedUsers()
+  {
+    $data = array(
+      'first_name' => $this->input->post('user_Fname_search'),
+      'last_name' => $this->input->post('user_Lname_search'),
+      'email' => $this->input->post('user_email_search'),
+      'state' => $this->input->post('user_state_search'),
+      );
+
+    $user = $this->User_model->get_user_search($data);
+    $this->format_data($user, 'edit');
+  }
+
+  public function edit_user()
+  {
+    $data = array(
+    'id' => $this->input->post('user_id'),
+    );
+        
+    $user = $this->User_model->get_user_edit($data);
+    echo "<pre>";
+    var_dump($user[0]);
+    echo "</pre>";
+    $userData = array();
+    foreach ($user[0] as $key => $value) {
+      $userData[$key] = $value;
+    }
+    echo "<pre>";
+    var_dump($userData);
+    echo "</pre>";
+  }
+
+  // formatting functions 
+  public function format_data($data, $output)
+  {
     // Pagination code below... Beware all ye who enter here
 
     // the number of pagination tabs
@@ -130,12 +173,12 @@ class User extends CI_Controller
 
 
     // iterates through $user's data
-    for ($i=0; $i < count($user) ; $i++) 
+    for ($i=0; $i < count($data) ; $i++) 
     { 
       // adds each return to the data_array up to 10
-      $data_array[] = $user[$i];
+      $data_array[] = $data[$i];
       // executed if the remaining elements are less than 10
-      if ($i == (count($user) - 1)) 
+      if ($i == (count($data) - 1)) 
       {
         $j = $i;
         while ( $j % 4 == 0) 
@@ -160,8 +203,11 @@ class User extends CI_Controller
     // creates the pagination display
     $html = $this->display_pagination($page_num_array);
     // adds the data tables to the display
-    $html .= $this->data_output_edit($pagination_array);
-
+    
+    if ($output == 'edit') 
+    {
+     $html .= $this->data_output_edit($pagination_array);
+    }
     echo json_encode($html);
   }
 
@@ -181,8 +227,9 @@ class User extends CI_Controller
     return $html;
   }
 
-  public function data_output_edit($array)  // outputted table code
-  {    
+  public function data_output_edit($array)  
+  { 
+    // outputted table code   
     $html = '';
     foreach ($array as $index => $key)
     {
@@ -191,41 +238,62 @@ class User extends CI_Controller
     
       $html .= "
         <table class=
-        'table' id='page{$index}'>
+        'table usersTable' id='usersPage{$index}'>
           <thead>
             <tr>
-              <th width='175'>First Name:</th>
-              <th width='175'>Last Name:</th>
-              <th width='175'>Phone Number:</th>
-              <th width='175'>Email Address:</th>
-              <th width='175'>Address:</th>
-              <th width='125'>Organization</th>
+              <th width='150'>First Name:</th>
+              <th width='150'>Last Name:</th>
+              <th width='150'>Phone Number:</th>
+              <th width='180'>Email Address:</th>
+              <th width='150'>Address:</th>
+              <th width='125'>Organization:</th>
+              <th width='125'>Edit:</th>
             </tr>
           </thead>
           <tbody>
       ";
       foreach ($key as $key2) 
       {
-      $html .= "
-        <tr>
-          <td>{$key2->first_name}</td>
-          <td>{$key2->last_name}</td>
-          <td>{$key2->phone}</td>
-          <td>{$key2->email}</td>
-          <td>
-            {$key2->street1}
-            <br>
-            {$key2->street2}
-            <br>
-            {$key2->city}  {$key2->state}
-            <br>
-            {$key2->zip}
-          </td>
-          <td>
-            <button value='{$key2->organizations_id}' class='button small' class='viewOrg'>View Organization</button>
-          </td>
-        </tr>
-      ";
+        $html .= "
+          <tr>
+            <td>{$key2->first_name}</td>
+            <td>{$key2->last_name}</td>
+            <td>{$key2->phone}</td>
+            <td>{$key2->email}</td>
+            <td>
+              {$key2->street1}
+              <br>
+              {$key2->street2}
+              <br>
+              {$key2->city}  {$key2->state}
+              <br>
+              {$key2->zip}
+            </td>
+            <td>
+              <form id='viewOrgs' method='post' action='../org/showOrg'>
+                <input type='hidden' value='{$key2->organizations_id}' name='orgId'>
+                <input type='hidden' value='{$key2->id}' name='user_id'>
+                <input type='submit' class='button small viewButton' class='viewOrg' value='View'>
+              </form>
+            </td>
+            <td>";
+
+        if ($this->userID->organizations_id == $key2->organizations_id) {
+          $html .= "
+          <form class='edit_user' method='post' action='../user/edit_user'>
+            <input type='hidden' value='{$key2->id}' name='user_id'>  
+            <input type='submit' class='button success small' value='Edit'>
+          </form>
+          ";
+        }
+        else
+        {
+          $html .= "<button class='button success disabled small'>Edit</button>";
+        }
+        $html .= "
+            </td>
+          </tr>
+        ";
       }
     $html .= "
         </tbody>
@@ -234,12 +302,13 @@ class User extends CI_Controller
     }
     return $html;
   }
+  // ******************************************
 
 
   public function logout()
   {
     $this->session->sess_destroy();
-    header('location: /welcome/index');
+    header('location:/main/index');
   }
 
   public function delete_user()
@@ -253,7 +322,7 @@ class User extends CI_Controller
     echo json_encode($deleted); 
   }
 
-  public function edit_user()
+  public function edit_user_validate()
   {
     $this->load->library('form_validation');
     $this->form_validation->set_rules('first_name', "First Name", 'alpha|required');
