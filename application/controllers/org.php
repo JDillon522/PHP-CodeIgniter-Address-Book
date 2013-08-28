@@ -14,7 +14,7 @@ class Org extends CI_Controller
     $this->userID =  $this->session->userdata("user_session");
   } 
 
-  public function process_org_registration()
+  public function validation()
   {
     $this->load->library('form_validation');
     $this->form_validation->set_rules('org_name', "Organization Name", 'required');
@@ -32,6 +32,30 @@ class Org extends CI_Controller
       echo json_encode($errors);
     }
     else
+    {
+      return TRUE;
+    }
+  }
+
+  public function edit_org()
+  {
+    header('Content-type: application/json');
+    $data = array(
+    'id' => $this->input->post('org_id'),
+    );
+        
+    $org = $this->Org_model->get_org_edit($data);
+    $orgData = array();
+    foreach ($org[0] as $key => $value) {
+      $orgData[$key] = $value;
+    }
+    echo json_encode($orgData);
+  }
+
+  public function process_org_registration()
+  {
+    $this->validation();
+    if ($this->validation()) 
     {
       $data = array(
         'org_name' => $this->input->post('org_name'),
@@ -53,22 +77,9 @@ class Org extends CI_Controller
 
   public function process_org_edit()
   {
-    $this->load->library('form_validation');
-    $this->form_validation->set_rules('org_name', "Organization Name", 'required');
-    $this->form_validation->set_rules('email', 'Email', 'valid_email|required');
-    $this->form_validation->set_rules('phone', 'Phone', 'is_natural|required');
-    $this->form_validation->set_rules('street1', 'Street 1', 'required');
-    $this->form_validation->set_rules('street2', 'Street 2', '');
-    $this->form_validation->set_rules('city', 'City', 'required');
-    $this->form_validation->set_rules('state', 'State', 'required|alpha|max_length[3]');
-    $this->form_validation->set_rules('zip', 'Zip Code', 'required|numeric');
-
-    if ($this->form_validation->run() == FALSE) 
-    {
-      $errors = "<div class='alert-box alert' id='error-box'>" . validation_errors() . "</div>";
-      echo json_encode($errors);
-    }
-    else
+    
+    $this->validation();
+    if ($this->validation()) 
     {
       $org_id = $this->input->post('edit_org_id');
 
@@ -90,23 +101,7 @@ class Org extends CI_Controller
     }
   }
 
-  public function edit_org()
-  {
-    header('Content-type: application/json');
-    $data = array(
-    'id' => $this->input->post('org_id'),
-    );
-        
-    $org = $this->Org_model->get_org_edit($data);
-    $orgData = array();
-    foreach ($org[0] as $key => $value) {
-      $orgData[$key] = $value;
-    }
-    echo json_encode($orgData);
-  }
-
 // ***** Display the organization data *****
-  // calls
   public function display_org()
   {
     $data = array(
@@ -131,7 +126,7 @@ class Org extends CI_Controller
     $this->format_data($org, 'edit');
   }
 
-  public function showOrg()
+  public function display_selected_org()
   {
     $data = array(
       'id' => $this->input->post('orgId'),
@@ -141,8 +136,7 @@ class Org extends CI_Controller
     $this->format_data($org, 'edit');
   }
   
-  // **********
-  // Formatting paths
+  // Formatting paths for the display
   public function display_pagination($array)
   {
     $html ="<div class='pagination-centered'>
@@ -291,7 +285,7 @@ class Org extends CI_Controller
   }
   // the dashboard display 
   public function data_output_edit($array)  
-  {    
+  {
     // outputted table code
     $html = '';
     foreach ($array as $index => $key)
@@ -353,7 +347,7 @@ class Org extends CI_Controller
             {$key2->zip}
           </td>
           <td>
-            <form id='viewUsers' method='post' action='../user/showUsers'>
+            <form id='viewUsers' method='post' action='../user/display_users_of_org'>
               <input type='hidden' value='{$key2->id}' name='usersId'>
               <input type='submit' class='button small' class='viewUsers' value='View'>
             </form>
