@@ -246,7 +246,29 @@ class Org extends CI_Controller
       $html .= "
         <tr>
           <td>{$key2->org_name}</td>
-          <td>{$key2->org_phone}</td>
+          <td>";
+
+            $phoneNum = $key2->org_phone;
+            $phoneNumArray = str_split($phoneNum);
+            for ($i = 0; $i < count($phoneNumArray); $i++ )
+            {
+              switch ($i) {
+                case '0':
+                  $html .= "({$phoneNumArray[$i]}";
+                  break;
+                case '2':
+                  $html .= "{$phoneNumArray[$i]}) ";
+                  break;
+                case '5':
+                  $html .= "{$phoneNumArray[$i]}-";
+                  break;
+                default:
+                  $html .= "{$phoneNumArray[$i]}";
+                  break;
+              }
+            }
+
+          $html .= "</td>
           <td>{$key2->org_email}</td>
           <td>
             {$key2->street1}
@@ -297,7 +319,29 @@ class Org extends CI_Controller
       $html .= "
         <tr>
           <td>{$key2->org_name}</td>
-          <td>{$key2->org_phone}</td>
+          <td>";
+
+            $phoneNum = $key2->org_phone;
+            $phoneNumArray = str_split($phoneNum);
+            for ($i = 0; $i < count($phoneNumArray); $i++ )
+            {
+              switch ($i) {
+                case '0':
+                  $html .= "({$phoneNumArray[$i]}";
+                  break;
+                case '2':
+                  $html .= "{$phoneNumArray[$i]}) ";
+                  break;
+                case '5':
+                  $html .= "{$phoneNumArray[$i]}-";
+                  break;
+                default:
+                  $html .= "{$phoneNumArray[$i]}";
+                  break;
+              }
+            }
+
+          $html .= "</td>
           <td>{$key2->org_email}</td>
           <td>
             {$key2->street1}

@@ -253,7 +253,29 @@ class User extends CI_Controller
           <tr>
             <td>{$key2->first_name}</td>
             <td>{$key2->last_name}</td>
-            <td>{$key2->phone}</td>
+            <td>";
+
+            $phoneNum = $key2->phone;
+            $phoneNumArray = str_split($phoneNum);
+            for ($i = 0; $i < count($phoneNumArray); $i++ )
+            {
+              switch ($i) {
+                case '0':
+                  $html .= "({$phoneNumArray[$i]}";
+                  break;
+                case '2':
+                  $html .= "{$phoneNumArray[$i]}) ";
+                  break;
+                case '5':
+                  $html .= "{$phoneNumArray[$i]}-";
+                  break;
+                default:
+                  $html .= "{$phoneNumArray[$i]}";
+                  break;
+              }
+            }
+
+  $html .= "</td>
             <td>{$key2->email}</td>
             <td>
               {$key2->street1}
