@@ -336,6 +336,7 @@ class User extends CI_Controller
         'password' => $encrypted_password,
         'organizations_id' => $this->input->post('org_select')
         );
+      
       $user = $this->User_model->edit_user($data, $user_id);
       $success = "<div class='alert-box success' id='success-box'><p>The account info has been updated.</p></div>";
       echo json_encode($success);

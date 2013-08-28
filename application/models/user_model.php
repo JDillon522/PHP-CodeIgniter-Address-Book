@@ -90,7 +90,8 @@ class User_model extends CI_Model
   {
     $this->db->set('updated_at', 'NOW()', FALSE);
     return $this->db
-                ->update('users', $data, array('id' => $users_id));
+                ->where('id', $users_id)
+                ->update('users', $data);
   }
 
 }

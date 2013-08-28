@@ -3,7 +3,7 @@
   <h3>Edit a User:</h3>
     <div class="row">
       <form method="post" action="../user/process_edit_user" id="edit_user_form">
-      <input type='hidden' name='edit_user_id'>
+      <input type='hidden' name='edit_user_id' id='edit_user_id'>
         <div class="row">
           <div class="large-6 columns">
             <label>First Name:</label>

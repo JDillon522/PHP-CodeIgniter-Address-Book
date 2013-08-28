@@ -9,7 +9,7 @@ class Dashboard extends CI_Controller
     parent:: __construct();
     $this->load->model('User_model');
     $this->check_session();
-    // $this->output->enable_profiler(TRUE);
+    $this->output->enable_profiler(TRUE);
     $this->load->model('Org_model');
     $this->orgOptions = $this->orgDisplay();
   }
