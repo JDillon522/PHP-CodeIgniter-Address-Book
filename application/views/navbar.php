@@ -27,7 +27,7 @@
       </ul>
       <ul class="right">
         <li class="divider"></li>
-        <li><a href="/user/logout">Logout</a></li>
+        <li><a href="/main/logout">Logout</a></li>
         <li class="divider"></li>
       </ul>
   </nav>

@@ -85,7 +85,7 @@ $(document).ready(function(){
     return false;
   }); 
   $('#user_search').submit();
-  $(document).on('click', 'a', function(e){
+  $(document).on('click', '.pageAnchor', function(e){
     $('.usersTable').hide();
     $('#usersPage'+$(this).attr('id')).show();
   return false;

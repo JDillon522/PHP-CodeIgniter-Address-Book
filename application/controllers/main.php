@@ -50,6 +50,12 @@ class Main extends CI_Controller
       return $html;
     }
   }
+
+  public function logout()
+  {
+    $this->session->sess_destroy();
+    $this->index();
+  }
 }
 
 /* End of file welcome.php */

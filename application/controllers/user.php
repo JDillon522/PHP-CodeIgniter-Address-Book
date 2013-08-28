@@ -300,12 +300,6 @@ class User extends CI_Controller
   // ******************************************
 
 
-  public function logout()
-  {
-    $this->session->sess_destroy();
-    header('location:/main/index');
-  }
-
   public function process_edit_user()
   {
     $this->form_validation->set_rules('first_name', "First Name", 'alpha|required');
