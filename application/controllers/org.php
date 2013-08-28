@@ -39,7 +39,6 @@ class Org extends CI_Controller
 
   public function edit_org()
   {
-    header('Content-type: application/json');
     $data = array(
     'id' => $this->input->post('org_id'),
     );
@@ -54,7 +53,6 @@ class Org extends CI_Controller
 
   public function process_org_registration()
   {
-    $this->validation();
     if ($this->validation()) 
     {
       $data = array(
@@ -77,8 +75,6 @@ class Org extends CI_Controller
 
   public function process_org_edit()
   {
-    
-    $this->validation();
     if ($this->validation()) 
     {
       $org_id = $this->input->post('edit_org_id');
@@ -137,22 +133,6 @@ class Org extends CI_Controller
   }
   
   // Formatting paths for the display
-  public function display_pagination($array)
-  {
-    $html ="<div class='pagination-centered'>
-        <ul class='pagination'>";
-    foreach ($array as $key) 
-    {
-      // each pagination link's id corresponds to the key number. this will correspond to the index number of the different tables
-      $html .="
-        <li><a href='#' id='{$key}' class='pageAnchor'>{$key}</a></li>";
-    }
-    $html .= "
-          </ul>
-        </div>";
-    return $html;
-  }  
-
   public function format_data($data, $output)
   {
     // Pagination code below... Beware all ye who enter here
@@ -173,22 +153,17 @@ class Org extends CI_Controller
     // iterates through $org's data
     for ($i=0; $i < count($data) ; $i++) 
     { 
-      // adds each return to the data_array up to 10
+      // adds each return to the data_array up to 4
       $data_array[] = $data[$i];
-      // executed if the remaining elements are less than 10
+      // executed if the remaining elements are less than 4
       if ($i == (count($data) - 1)) 
       {
-        $j = $i;
-        while ( $j % 4 == 0) 
-        {
-          $j++;
-        }
         $page_num ++;
         $page_num_array[] = $page_num;
         $pagination_array[$page_num] = $data_array;
         $data_array = array ();
       }
-
+      // executed every time 4 entries are added to $data_array
       if ($i != 0 AND ($i + 1) % 4 == 0) 
       {
         $page_num ++;
@@ -212,7 +187,22 @@ class Org extends CI_Controller
 
     echo json_encode($html);
   }
-
+  
+  public function display_pagination($array)
+  {
+    $html ="<div class='pagination-centered'>
+        <ul class='pagination'>";
+    foreach ($array as $key) 
+    {
+      // each pagination link's id corresponds to the key number. this will correspond to the index number of the different tables
+      $html .="
+        <li><a href='#' id='{$key}' class='pageAnchor'>{$key}</a></li>";
+    }
+    $html .= "
+          </ul>
+        </div>";
+    return $html;
+  }  
   // the main page display
   public function data_output($array)  
   {
@@ -262,13 +252,21 @@ class Org extends CI_Controller
               }
             }
 
-          $html .= "</td>
+      $html .= "
+          </td>
           <td>{$key2->org_email}</td>
           <td>
             {$key2->street1}
-            <br>
+            <br>";
+
+          if (!$key2->street2 == '') 
+          {
+            $html .= "
             {$key2->street2}
-            <br>
+            <br>";
+          }
+              
+        $html .= "
             {$key2->city}  {$key2->state}
             <br>
             {$key2->zip}
@@ -335,13 +333,21 @@ class Org extends CI_Controller
               }
             }
 
-          $html .= "</td>
+          $html .= "
+          </td>
           <td>{$key2->org_email}</td>
           <td>
             {$key2->street1}
-            <br>
+            <br>";
+
+        if (!$key2->street2 == '') 
+        {
+          $html .= "
             {$key2->street2}
-            <br>
+            <br>";
+        }
+              
+        $html .= "
             {$key2->city}  {$key2->state}
             <br>
             {$key2->zip}
@@ -378,3 +384,6 @@ class Org extends CI_Controller
     return $html;
   }
 }
+
+/* End of file org.php */
+/* Location: ./application/controllers/org.php */

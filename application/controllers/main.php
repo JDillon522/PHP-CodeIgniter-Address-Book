@@ -18,9 +18,6 @@ class Main extends CI_Controller
 
     $data = array(
       'title' => 'Willow Tree Address Book',
-      'addons' => '<link rel="stylesheet" type="text/css" href="../../assets/CSS/base.css">
-        <link rel="stylesheet" type="text/css" href="../../assets/CSS/main.css">',
-      'scripts' => '<script src="../../assets/js/loginRegister.js" />',
       'options' => $this->orgOptions
       );
 

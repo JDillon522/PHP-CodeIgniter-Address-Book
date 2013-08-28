@@ -116,3 +116,5 @@ $(document).ready(function(){
   });
 });
 
+/* End of file searchDisplay.js */
+/* Location: ./assets/js/searchDisplay.js */

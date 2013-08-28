@@ -18,8 +18,10 @@
 <script src="../../assets/js/vendor/custom.modernizr.js"></script>
 
 <!-- Extra JS / CSS / Addons / Whatever strikes my fancy -->
-<?php echo $addons; ?>
-
-
+<link rel="stylesheet" type="text/css" href="../../assets/css/base.css">
+<script type="text/javascript" src="../../assets/js/edit.js"></script>
+<script type="text/javascript" src="../../assets/js/loginRegister.js"></script>
+<script type="text/javascript" src="../../assets/js/nav.js"></script>
+<script type="text/javascript" src="../../assets/js/searchDisplay.js"></script>
 </head>
 <body>

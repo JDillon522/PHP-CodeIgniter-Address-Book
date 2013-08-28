@@ -105,3 +105,6 @@ class Org_model extends CI_Model
             ->update('organizations', $data);
   }
 } 
+
+/* End of file org_model.php */
+/* Location: ./application/models/org_model.php */

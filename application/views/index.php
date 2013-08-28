@@ -47,7 +47,3 @@
 <div class="row">
   <div class="large-12 columns" id="org_results"></div>
 </div>
-
-
-<script type="text/javascript" src="../../assets/js/searchDisplay.js"></script>
-

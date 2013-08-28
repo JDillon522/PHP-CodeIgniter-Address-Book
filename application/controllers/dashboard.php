@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller
 {
@@ -25,9 +25,6 @@ class Dashboard extends CI_Controller
   { 
     $data = array(
       'title' => 'Willow Tree Address Book - Dashboard',
-      'addons' => '
-      <link rel="stylesheet" type="text/css" href="../../assets/CSS/base.css">
-      <link rel="stylesheet" type="text/css" href="../../assets/CSS/dashboard.css">',
       'options' => $this->orgOptions,
       );
 
@@ -59,5 +56,7 @@ class Dashboard extends CI_Controller
       return $html;
     }
   }
-
 }
+
+/* End of file dashboard.php */
+/* Location: ./application/controllers/dashboard.php */

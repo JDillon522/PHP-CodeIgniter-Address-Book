@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  
+  // Login 
   $('#login_form').submit(function(){
     $.post
     (
@@ -18,12 +20,14 @@ $(document).ready(function(){
     return false;
   });
 
-  $('#register_user_form').submit(function(){
+  // Register User
+  $('#register_user_form').submit(function(e){
     $.post
     (
       $(this).attr('action'),
       $(this).serialize(),
       function(data){
+        alert("user registered");
         console.log(data);
         $('#alert_box2').html(data);
       },
@@ -33,6 +37,7 @@ $(document).ready(function(){
     return false;
   });
 
+  // Register Org
   $('#register_org_form').submit(function(){
     $.post
     (
@@ -48,3 +53,6 @@ $(document).ready(function(){
     return false;
   });
 });
+
+/* End of file loginRegister.js */
+/* Location: ./assets/js/loginRegister.js */

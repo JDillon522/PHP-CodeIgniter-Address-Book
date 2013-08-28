@@ -57,7 +57,6 @@ class User extends CI_Controller
 
   public function process_user_registration()
   {
-    $this->validation();
     if ($this->validation()) 
     {
       $encrypted_password = $this->encrypt->encode($this->input->post('password1'));
@@ -83,7 +82,6 @@ class User extends CI_Controller
 
   public function edit_user()
   {
-    header('Content-type: application/json');
     $data = array(
     'id' => $this->input->post('user_id'),
     );
@@ -98,7 +96,6 @@ class User extends CI_Controller
 
   public function process_edit_user()
   {
-    $this->validation();
     if ($this->validation()) 
     {
       $encrypted_password = $this->encrypt->encode($this->input->post('password1'));
@@ -139,7 +136,7 @@ class User extends CI_Controller
 
     if ($this->form_validation->run() == FALSE) 
     {
-      $errors = "<div class='alert-box alert' id='error-box'>" . validation_errors() . "</div>";
+      $errors = "<div class='alert-box alert'>" . validation_errors() . "</div>";
       echo json_encode($errors);
     }
     else
@@ -193,22 +190,17 @@ class User extends CI_Controller
     // iterates through $user's data
     for ($i=0; $i < count($data) ; $i++) 
     { 
-      // adds each return to the data_array up to 10
+      // adds each return to the data_array up to 4
       $data_array[] = $data[$i];
-      // executed if the remaining elements are less than 10
+      // executed if the remaining elements are less than 4
       if ($i == (count($data) - 1)) 
       {
-        $j = $i;
-        while ( $j % 4 == 0) 
-        {
-          $j++;
-        }
         $page_num ++;
         $page_num_array[] = $page_num;
         $pagination_array[$page_num] = $data_array;
         $data_array = array ();
       }
-
+      // executed every time 4 entries are added to $data_array
       if ($i != 0 AND ($i + 1) % 4 == 0) 
       {
         $page_num ++;
@@ -221,7 +213,6 @@ class User extends CI_Controller
     // creates the pagination display
     $html = $this->display_pagination($page_num_array);
     // adds the data tables to the display
-    
     if ($output == 'edit') 
     {
      $html .= $this->data_output_edit($pagination_array);
@@ -235,7 +226,7 @@ class User extends CI_Controller
         <ul class='pagination'>";
     foreach ($array as $key) 
     {
-      // each pagination link's id corresponds to the key number. this will correspond to the index number of the different tables
+      // each pagination link id corresponds to the key number. This will correspond to the index number of the different tables
       $html .="
         <li><a href='#' id='{$key}' class='pageAnchor'>{$key}</a></li>";
     }
@@ -295,13 +286,21 @@ class User extends CI_Controller
                   break;
               }
             }
-        $html .= "</td>
+        $html .= "
+            </td>
             <td>{$key2->email}</td>
             <td>
               {$key2->street1}
-              <br>
+              <br>";
+
+        if (!$key2->street2 == '') 
+        {
+          $html .= "
               {$key2->street2}
-              <br>
+              <br>";
+        }
+              
+        $html .= "
               {$key2->city}  {$key2->state}
               <br>
               {$key2->zip}
@@ -340,3 +339,6 @@ class User extends CI_Controller
     return $html;
   }
 }
+
+/* End of file user.php */
+/* Location: ./application/controllers/user.php */

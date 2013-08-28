@@ -1,5 +1,5 @@
-// Edit User 
 $(document).ready(function(){ 
+  // Edit User 
   $('#edit_user_form').submit(function(){
     $.post
     (
@@ -15,6 +15,7 @@ $(document).ready(function(){
     return false;
   });
 
+  // Edit Org 
   $('#edit_org_form').submit(function(){
     $.post
     (
@@ -30,6 +31,7 @@ $(document).ready(function(){
     return false;
   });
 
+  // Populates the Edit User form
   $(document).on('submit', '.edit_user', function(){
     console.log('submit');
     $.post
@@ -57,7 +59,7 @@ $(document).ready(function(){
     return false;
   });
 
-// Edit Organization  
+  // Populates the Edit Organization form  
   $(document).on('submit', '.edit_org', function(){
     console.log('submit');
     $.post
@@ -84,3 +86,6 @@ $(document).ready(function(){
     return false;
   });
 })
+
+/* End of file edit.js */
+/* Location: ./assets/js/edit.js */

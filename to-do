@@ -1,6 +1,4 @@
 - potentially rework the DB to have User's address' separate 
 - look into Oauth,TankAuth,IonAuth for third party login and registration 
-- add end of file info to all docs
 - Fix the Org registeration Ajax so that the list in register users is updated with the new Org.
 - make it so "none" is displayed when no data is present
-- change display on phone numbers to ###-###-####

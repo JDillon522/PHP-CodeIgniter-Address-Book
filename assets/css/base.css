@@ -1,5 +1,21 @@
+.editButton {
+  margin-top: 15px;
+}
+
+#street2 {
+  margin-top: 15px;
+}
+
 #top-bar-title {
   color: white;
   padding-right: 15px;
   padding-left: 15px;
 }
+
+.viewButton {
+  margin-top: 15px;
+  margin-left: 20px;
+}
+
+/* End of file base.css */
+/* Location: ./assets/js/base.css */

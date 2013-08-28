@@ -125,5 +125,3 @@
   <div id="alert_box3"></div>
   <a class="close-reveal-modal">&#215;</a>
 </div>
-
-<script type="text/javascript" src="../../assets/js/loginRegister.js"></script>
