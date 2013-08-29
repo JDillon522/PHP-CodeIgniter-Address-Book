@@ -5,6 +5,8 @@ $(document).ready(function(){
   $('#selectedUsersDiv').hide();
   $('#selectedOrgDiv').hide();
   $('#userSearch').show();
+  $(document).foundation('joyride', 'start');
+
   // Search User
   $('#searchUsers').click(function(){
     $('#selectedUsersDiv').hide();
@@ -19,6 +21,12 @@ $(document).ready(function(){
     $('#selectedOrgDiv').hide();
     $('#userSearch').hide();
     $('#organizationSearch').show('slow');
+    $('#org_search').submit();
+  });
+
+  // Reload the search whenever a user exits a modal.
+  $(document).on('click', '.close-reveal-modal', function(){
+    $('#user_search').submit();
     $('#org_search').submit();
   });
 
@@ -114,6 +122,11 @@ $(document).ready(function(){
     $('#usersPage'+$(this).attr('id')).show();
   return false;
   });
+
+  // keeps the disabled Edit buttons from submitting. They are forms only to ease css and formatting issues with Foundation
+  $(document).on('click', '.disabledEdit', function(){
+    return false;
+  })
 });
 
 /* End of file searchDisplay.js */

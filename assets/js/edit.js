@@ -7,11 +7,15 @@ $(document).ready(function(){
       $(this).serialize(),
       function(data){
         console.log(data);
-        $('#alert_box4').html(data);
+        if (data === 'success') {
+          $('#alert_box4').html(data);
+          this.reset();
+        } else {
+          $('#alert_box4').html(data);
+        };
       },
       "json"
     );
-    this.reset();
     return false;
   });
 
@@ -23,11 +27,15 @@ $(document).ready(function(){
       $(this).serialize(),
       function(data){
         console.log(data);
-        $('#alert_box5').html(data);
+        if (data === 'success') {
+          $('#alert_box5').html(data);
+          this.reset();
+        } else {
+          $('#alert_box5').html(data);
+        };
       },
       "json"
     );
-    this.reset();
     return false;
   });
 

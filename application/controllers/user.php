@@ -132,7 +132,7 @@ class User extends CI_Controller
     $this->form_validation->set_rules('state', 'State', 'required|alpha|max_length[3]');
     $this->form_validation->set_rules('zip', 'Zip Code', 'required|numeric');
     $this->form_validation->set_rules('password1', 'Password', 'min_length[6]|required');
-    $this->form_validation->set_rules('password2', 'Password', 'matches[password1]|required');
+    $this->form_validation->set_rules('password2', 'Confirmation Password', 'matches[password1]|required');
 
     if ($this->form_validation->run() == FALSE) 
     {
@@ -324,7 +324,10 @@ class User extends CI_Controller
         }
         else
         {
-          $html .= "<button class='button success disabled small'>Edit</button>";
+          $html .= "
+          <form>
+            <button class='button success disabled small disabledEdit'>Edit</button>
+          </form>";
         }
         $html .= "
             </td>

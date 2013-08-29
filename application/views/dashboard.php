@@ -63,7 +63,7 @@
     <h3>Associated Users:</h3>
   </div>
   <div id="selectedUsers" class="large-12 columns">
-    <h4>None</h4>
+    
   </div>
 </div>
 
@@ -73,6 +73,6 @@
     <h3>Selected Organization:</h3>
   </div>
   <div id="selectedOrg" class="large-12 columns">
-    <h4>None</h4>
+    
   </div>
 </div>

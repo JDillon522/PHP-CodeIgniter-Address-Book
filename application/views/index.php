@@ -17,7 +17,7 @@
         <li><a href="#" data-reveal-id="login-modal">Login</a></li>
         <li class="divider"></li>
         <li><a href="#" data-reveal-id="register_user_modal">Register a User</a></li>
-        <li class="divider"></li>   
+        <li class="divider" id="stop3"></li>   
         <li><a href="#" data-reveal-id="register_org_modal">Register an Organization</a></li>       
         <li class="divider"></li>
       </ul>
@@ -36,7 +36,7 @@
             <input type="text" placeholder="Email Address" id="org_email_search" name="org_email_search" />
           </div>
           <div class="large-4 columns">
-            <input type="text" placeholder="State" id="org_state_search" name="org_state_search">
+            <input type="text" placeholder="State" id="org_state_search stop3" name="org_state_search">
           </div>
       </div>
     </form>

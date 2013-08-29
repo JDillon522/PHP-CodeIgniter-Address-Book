@@ -27,13 +27,16 @@ $(document).ready(function(){
       $(this).attr('action'),
       $(this).serialize(),
       function(data){
-        alert("user registered");
         console.log(data);
-        $('#alert_box2').html(data);
+        if (data === 'success') {
+          $('#alert_box2').html(data);
+          this.reset();
+        } else {
+          $('#alert_box2').html(data);
+        };
       },
       "json"
     );
-    this.reset();
     return false;
   });
 
@@ -45,11 +48,15 @@ $(document).ready(function(){
       $(this).serialize(),
       function(data){
         console.log(data);
-        $('#alert_box3').html(data);
+        if (data === 'success') {
+          $('#alert_box3').html(data);
+          this.reset();
+        } else {
+          $('#alert_box3').html(data);
+        };
       },
       "json"
     );
-    this.reset();
     return false;
   });
 });

@@ -1,4 +1,3 @@
 - potentially rework the DB to have User's address' separate 
 - look into Oauth,TankAuth,IonAuth for third party login and registration 
-- Fix the Org registeration Ajax so that the list in register users is updated with the new Org.
-- make it so "none" is displayed when no data is present
+

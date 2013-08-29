@@ -369,7 +369,10 @@ class Org extends CI_Controller
         }
         else
         {
-          $html .= "<button class='button success disabled small'>Edit</button>";
+          $html .= "
+          <form>
+            <button class='button success disabled small disabledEdit'>Edit</button>
+          </form>";
         }
 
         $html .= "
