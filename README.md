@@ -13,14 +13,16 @@ I will have the following functionality:
   - User cannot edit any info
   
 
-******** Final Results **********
+***************************
 
-- 95% functionality
-- Buggs:
-  - Logout button will not work. I have no idea why
-  - When you edit a user or organizaion it will validate and submit but not update the DB. Something is wrong with my Active Record Query and I'm at a loss 
-  - When you click on a link or open a modal the table data hides. It reappears when you click on a pageination link 
-    - This is possibly an issue conflicting with Foundation. 
+Final Results:
 
-- Overall I'm rather proud of it and it works seamlessly (sans buggs) 
-  
+100% functionality
+- Everything is Ajaxed.
+- Things operate smoothly
+
+Potential additions / changes to do:
+- Change the validation errors output to Foundations built in aspects.
+- Integrate Google Maps API so that when users click on an address, it pulls up a modal with a map of that location. 
+
+I'm rather pleased with this wee project. 
