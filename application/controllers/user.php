@@ -326,7 +326,7 @@ class User extends CI_Controller
         {
           $html .= "
           <form>
-            <button class='button success disabled small disabledEdit'>Edit</button>
+            <button class='button success disabled small disabledEdit' value='{$key2->id}'>Edit</button>
           </form>";
         }
         $html .= "

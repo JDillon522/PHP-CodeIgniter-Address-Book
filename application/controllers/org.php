@@ -40,9 +40,8 @@ class Org extends CI_Controller
   public function edit_org()
   {
     $data = array(
-    'id' => $this->input->post('org_id'),
+    'id' => $this->input->post('edit_org_id'),
     );
-        
     $org = $this->Org_model->get_org_edit($data);
     $orgData = array();
     foreach ($org[0] as $key => $value) {
@@ -77,7 +76,7 @@ class Org extends CI_Controller
   {
     if ($this->validation()) 
     {
-      $org_id = $this->input->post('edit_org_id');
+      $org_id = $this->input->post('edit_org_id2');
 
       $data = array(
         'org_name' => $this->input->post('org_name'),
@@ -363,7 +362,7 @@ class Org extends CI_Controller
         if ($this->userID->organizations_id == $key2->id) {
         $html .= "
           <form class='edit_org' method='post' action='../org/edit_org'>
-            <input type='hidden' value='{$key2->id}' name='org_id'>  
+            <input type='hidden' value='{$key2->id}' name='edit_org_id' id='edit_org_id'>  
             <input type='submit' class='button success small' value='Edit'>
           </form>";
         }
@@ -371,7 +370,7 @@ class Org extends CI_Controller
         {
           $html .= "
           <form>
-            <button class='button success disabled small disabledEdit'>Edit</button>
+            <button class='button success disabled small disabledEdit' value='{$key2->id}'>Edit</button>
           </form>";
         }
 

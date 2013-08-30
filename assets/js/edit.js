@@ -47,7 +47,7 @@ $(document).ready(function(){
       $(this).attr('action'),
       $(this).serialize(),
       function(data){
-        console.log("data");
+        console.log("data:");
         console.log(data);
         $('#edit_user').foundation('reveal', 'open');
         $('#edit_user_id').val(data['id']);
@@ -75,10 +75,10 @@ $(document).ready(function(){
       $(this).attr('action'),
       $(this).serialize(),
       function(data){
-        console.log("data");
+        console.log("data:");
         console.log(data);
         $('#edit_org').foundation('reveal', 'open');
-        $('#edit_org_id').val(data['id']);
+        $('#edit_org_id2').val(data['id']);
         $('#edit_org_name').val(data['org_name']);
         $('#edit_org_email').val(data['org_email']);
         $('#edit_org_phone').val(data['org_phone']);
