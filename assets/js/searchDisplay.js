@@ -5,7 +5,6 @@ $(document).ready(function(){
   $('#selectedUsersDiv').hide();
   $('#selectedOrgDiv').hide();
   $('#userSearch').show();
-  $(document).foundation('joyride', 'start');
 
   // Search User
   $('#searchUsers').click(function(){

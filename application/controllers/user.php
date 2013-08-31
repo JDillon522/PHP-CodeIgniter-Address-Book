@@ -116,6 +116,9 @@ class User extends CI_Controller
     
       $user = $this->User_model->edit_user($data, $user_id);
       $success = "<div class='alert-box success' id='success-box'><p>The account info has been updated.</p></div>";
+
+      $user = $this->User_model->get_user($data);
+      $this->session->set_userdata('user_session', $user);
       echo json_encode($success);
     } 
   }
