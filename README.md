@@ -24,6 +24,7 @@ Final Results:
 Potential additions / changes to do:
 - Change the validation errors output to Foundations built in aspects.
 - Integrate Google Maps API so that when users click on an address, it pulls up a modal with a map of that location. 
+- Change validation code to a third party plugin that is more secure ( Oauth,TankAuth,IonAuth were suggested ).
 
 I'm rather pleased with this wee project. 
 ******************************
