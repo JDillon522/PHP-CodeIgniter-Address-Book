@@ -3,7 +3,7 @@ WTA-Project
 
 A simple address book. 
 
-I will have the following functionality:
+It has the following functionality:
 - Users can create an account and identify with an organization
 - Users can search other organizations and users
 - If user can edit organization info if user belongs to organization
