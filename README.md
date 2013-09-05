@@ -28,7 +28,4 @@ Potential additions / changes to do:
 I'm rather pleased with this wee project. 
 ******************************
 
-Bugs:
-
-- Just descovered that when the user edits their data, it does not reset the session. It will appear as if the user cannot edit themselves. You'd have to log out and log back in for it to reset. 
-  - I'm on it like white on rice. 
+No known bugs.
