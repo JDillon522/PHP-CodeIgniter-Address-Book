@@ -4,7 +4,7 @@ class User extends CI_Controller
 {
   var $userID;
 
-  //initalization
+  //initialization
   public function __construct()
   {
     parent:: __construct();

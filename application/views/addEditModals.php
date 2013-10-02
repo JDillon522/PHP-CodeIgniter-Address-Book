@@ -64,7 +64,7 @@
   <h3>Register An Organization:</h3>
   <div class="row">
     <form method="post" action="../org/process_org_edit" id="edit_org_form">
-      <input type='hidden' name='edit_org_id2' id='edit_org_id2'>
+      <input type='hidden' name='edit_org_id2q ' id='edit_org_id2'>
         <div class="row">
           <div class="row">
             <div class="large-12 columns">
